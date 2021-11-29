@@ -1,1 +1,1 @@
-javac -d . main.java
+javac -d ./bin main.java
