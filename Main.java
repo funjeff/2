@@ -3,15 +3,22 @@ package main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import instructions.BInstruction;
+import instructions.CBInstruction;
+import instructions.DInstruction;
+import instructions.IInstruction;
 import instructions.Instruction;
+import instructions.RInstruction;
 
-public class main {
+public class Main {
 
 	static ArrayList <String> opcodes = new ArrayList <String>();
 	
 	static HashMap <String,String> codeToName = new HashMap <String,String>();
 
-	
+	public static void main (String [] args) {
+		ArrayList <Instruction> programInstructions = new ArrayList <Instruction>();
+	}
 	
 	
 	public static Instruction getInstruction (String bitString) {
@@ -38,24 +45,25 @@ public class main {
 		
 		String [] nameAndType = name.split(",");
 		
-		Instruction returnInstruction;
+		Instruction returnInstruction = null;
 		
 		switch (nameAndType[1]) {
 		case "R":
-			
+			returnInstruction = new RInstruction(nameAndType[0],bitString.substring(11,16),bitString.substring(16,22),bitString.substring(22,27),bitString.substring(27,32));
 		case "I":
-			
+			returnInstruction = new IInstruction(nameAndType[0],bitString.substring(10,22),bitString.substring(22,27),bitString.substring(27,32));
 		case "B":
-			
+			returnInstruction = new BInstruction(nameAndType[0],bitString.substring(7));
 		case "CB":
-			
+			returnInstruction = new CBInstruction(nameAndType[0],bitString.substring(7,27),bitString.substring(27));
 		case "D":
-			
+			returnInstruction = new DInstruction(nameAndType[0],bitString.substring(11,20),bitString.substring(20,22),bitString.substring(22,27),bitString.substring(27,32));
 		default:
 		   System.out.println("hey Jeffrey you forgot " +nameAndType[1] +" idiot");
 		
 		}
-		
+	
+		return returnInstruction;
 	}
 	
 	
