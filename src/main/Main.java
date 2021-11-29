@@ -18,24 +18,11 @@ public class Main {
 	static HashMap <String,String> codeToName = new HashMap <String,String>();
 
 	public static void main (String [] args) {
+		ArrayList <Instruction> programInstructions = new ArrayList <Instruction>();
 		
-		 ArrayList <com.sun.org.apache.bcel.internal.generic.Instruction> programInstructions = new ArrayList <Instruction> ();
-		 File file = new File(args[1]);
-		 byte[] fileData = new byte[(int) file.length()];
-		 DataInputStream dis = new DataInputStream(new FileInputStream(file));
-		 dis.readFully(fileData);
-		 dis.close();
-		 
-		 for (int i = 0; i < fileData.length; i=i+4) {
-			 String bitString = "";
-			 bitString = Integer.toBinaryString(fileData[0] & 0xFF);
-			 bitString = Integer.toBinaryString(fileData[1] & 0xFF);
-			 bitString = Integer.toBinaryString(fileData[2] & 0xFF);
-			 bitString = Integer.toBinaryString(fileData[3] & 0xFF);
-			 programInstructions.add(getInstruction(bitString));
-		 }
-		 
-		 
+		Scanner s = new Scanner (args[1]);
+		
+		
 		
 	}
 	
