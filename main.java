@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import instructions.BInstruction;
-import instructions.CBInstruction;
-import instructions.DInstruction;
-import instructions.IInstruction;
-import instructions.Instruction;
-import instructions.RInstruction;
+import instructions.*;
 
 public class Main {
 
@@ -19,7 +14,7 @@ public class Main {
 
 	public static void main (String [] args) {
 		
-		 ArrayList <Instruction> programInstructions = new ArrayList <Instruction> ();
+		 ArrayList <com.sun.org.apache.bcel.internal.generic.Instruction> programInstructions = new ArrayList <Instruction> ();
 		 File file = new File(args[1]);
 		 byte[] fileData = new byte[(int) file.length()];
 		 DataInputStream dis = new DataInputStream(new FileInputStream(file));
@@ -28,18 +23,11 @@ public class Main {
 		 
 		 for (int i = 0; i < fileData.length; i=i+4) {
 			 String bitString = "";
-			 bitString = bitString + Integer.toBinaryString(fileData[0] & 0xFF);
-			 bitString = bitString + Integer.toBinaryString(fileData[1] & 0xFF);
-			 bitString = bitString + Integer.toBinaryString(fileData[2] & 0xFF);
-			 bitString =bitString +  Integer.toBinaryString(fileData[3] & 0xFF);
-			 
-			 Instruction toAdd = getInstruction(bitString);
-			 
-			 if (toAdd instanceof BInstrucion || toAdd instanceof CBInstrucion) {
-				 
-			 }
-			 
-			 programInstructions.add(toAdd);
+			 bitString = Integer.toBinaryString(fileData[0] & 0xFF);
+			 bitString = Integer.toBinaryString(fileData[1] & 0xFF);
+			 bitString = Integer.toBinaryString(fileData[2] & 0xFF);
+			 bitString = Integer.toBinaryString(fileData[3] & 0xFF);
+			 programInstructions.add(getInstruction(bitString));
 		 }
 		 
 		 
@@ -75,11 +63,7 @@ public class Main {
 		
 		switch (nameAndType[1]) {
 		case "R":
-			if (nameAndType [0].equals("LSL") || nameAndType [0].equals("LSR")) {
-				returnInstruction = new ShiftInstruction(nameAndType[0],bitString.substring(11,16),bitString.substring(16,22),bitString.substring(22,27),bitString.substring(27,32));
-			} else {
-				returnInstruction = new RInstruction(nameAndType[0],bitString.substring(11,16),bitString.substring(16,22),bitString.substring(22,27),bitString.substring(27,32));
-			}
+			returnInstruction = new RInstruction(nameAndType[0],bitString.substring(11,16),bitString.substring(16,22),bitString.substring(22,27),bitString.substring(27,32));
 		case "I":
 			returnInstruction = new IInstruction(nameAndType[0],bitString.substring(10,22),bitString.substring(22,27),bitString.substring(27,32));
 		case "B":
