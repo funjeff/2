@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import com.sun.org.apache.bcel.internal.generic.Instruction;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -31,6 +34,8 @@ public class MainFile {
 		 	throw e;
 		 }
 		 
+		 int index = 0;
+		 
 		 for (int i = 0; i < fileData.length; i=i+4) {
 			 String bitString = "";
 			 bitString = bitString + Integer.toBinaryString(fileData[0] & 0xFF);
@@ -40,20 +45,39 @@ public class MainFile {
 			 
 			 Instruction toAdd = getInstruction(bitString);
 			 
-			 if (toAdd instanceof BInstrucion || toAdd instanceof CBInstrucion) {
-				 if (toAdd instanceof BInstrucion) {
-					 toAdd = (BInstruction) toAdd;
-				 } else {
-					 toAdd = (CBInstruciton) toAdd;
+			 if (toAdd instanceof BInstrucion) {
+				
+				 int address = (i/4) + Integer.parseInt((BInstrucion)toAdd.BR_address);
+				 
+				 toAdd.setBranchName("A" + index);
+				 
+				 index = index + 1;
+				 
+				 if (!addressList.contains(address)) {
+					 addressList.add(address);
 				 }
-				 toAdd.setBranchName((i/4) + Integer.parseInt(toAdd.BR_address));
-
+				 
 			 }
 			 programInstructions.add(toAdd);
 		 }
 		 
+		 index = 0;
 		 
-		
+		 for (int i = 0; i< programInstructions.size(); i++) {
+			 if (!addressList.contains(i)) {
+				 programInstructions.get(i).printInstruction();
+			 } else {
+				 System.out.prinltn("A" + index+":");
+				 index = index + 1;
+				 for (int j = 0; j < addressList.size();j++) {
+					 if (addressList.get(j) == i) {
+						 addressList.remove(j);
+					 }
+				 }
+				 i = i -1;
+			 }
+		 }
+		 	
 	}
 	
 	

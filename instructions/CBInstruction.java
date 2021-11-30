@@ -2,9 +2,9 @@ package instructions;
 
 import java.util.HashMap;
 
-public class CBInstruction extends Instruction {
+public class CBInstruction extends BInstruction {
 	String name;
-	String BR_address;
+	public String BR_address;
 	static HashMap <String,String> getCond;
 	String cond;
 	
@@ -17,6 +17,7 @@ public class CBInstruction extends Instruction {
 		this.BR_address = BR_address;
 		cond = getCond.get(Rt);
 	}
+	
 	
 	@Override
 	public void printInstruction(){
