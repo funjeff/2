@@ -20,6 +20,7 @@ public class MainFile {
 	public static void main (String [] args) throws IOException{
 		
 		 ArrayList <Instruction> programInstructions = new ArrayList <Instruction> ();
+		 Arraylist <int> addressList = new Arraylist<int>();
 		 File file = new File(args[0]);
 		 byte[] fileData = new byte[(int) file.length()];
 		 try{
@@ -35,7 +36,7 @@ public class MainFile {
 			 bitString = bitString + Integer.toBinaryString(fileData[0] & 0xFF);
 			 bitString = bitString + Integer.toBinaryString(fileData[1] & 0xFF);
 			 bitString = bitString + Integer.toBinaryString(fileData[2] & 0xFF);
-			 bitString =bitString +  Integer.toBinaryString(fileData[3] & 0xFF);
+			 bitString = bitString +  Integer.toBinaryString(fileData[3] & 0xFF);
 			 
 			 Instruction toAdd = getInstruction(bitString);
 			 
