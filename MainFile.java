@@ -40,9 +40,14 @@ public class MainFile {
 			 
 			 Instruction toAdd = getInstruction(bitString);
 			 
-			 if (toAdd instanceof BInstruction || toAdd instanceof CBInstruction) {
-				 
-			 }
+			 if (toAdd instanceof BInstrucion || toAdd instanceof CBInstrucion) {
+				 if (toAdd instanceof BInstrucion) {
+					 toAdd = (BInstruction) toAdd;
+				 } else {
+					 toAdd = (CBInstruciton) toAdd;
+				 }
+				 toAdd.setBranchName((i/4) + Integer.parseInt(toAdd.BR_address));
+
 			 
 			 programInstructions.add(toAdd);
 		 }

@@ -21,7 +21,7 @@ public class CBInstruction extends Instruction {
 	@Override
 	public void printInstruction(){
 		//TODO figure out how B instructions are usally laied out
-		System.out.println(name + "." + cond + " " + BR_address);
+		System.out.println(name + "." + cond + " " + branchName);
 	}
 	
 	public void initCond() {

@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Instruction {
 	
 	String instuctionName = "";
+	String branchName;
 	
 	public Instruction() {
 		
@@ -15,4 +16,7 @@ public class Instruction {
 		
 	}
 	
+	public void setBranchName (String branchName) {
+		this.branchName = branchName;
+	}
 }
