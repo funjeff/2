@@ -11,7 +11,7 @@ public class ShiftInstruction extends Instruction {
 		this.name = name;
 		saveReg = Integer.parseInt(Rd,2);
 		reg1 = Integer.parseInt(Rn,2);
-		shamt = Integer.parseInt(shamt,2);
+		this.shamt = Integer.parseInt(shamt,2);
 	}
 	
 	@Override

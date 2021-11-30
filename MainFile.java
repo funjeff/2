@@ -1,15 +1,15 @@
-package main;
+package MainFile;
 
+import java.io.File;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import instructions.BInstruction;
-import instructions.CBInstruction;
-import instructions.DInstruction;
-import instructions.IInstruction;
-import instructions.Instruction;
-import instructions.RInstruction;
+import instructions.*;
 
 public class MainFile {
 
@@ -17,17 +17,18 @@ public class MainFile {
 	
 	static HashMap <String,String> codeToName = new HashMap <String,String>();
 
-	public static void main (String [] args) {
+	public static void main (String [] args) throws IOException{
 		
 		 ArrayList <Instruction> programInstructions = new ArrayList <Instruction> ();
-	
-		 ArrayList <int> branchLines = new ArrayList <int>();
-		 
-		 File file = new File(args[1]);
+		 File file = new File(args[0]);
 		 byte[] fileData = new byte[(int) file.length()];
-		 DataInputStream dis = new DataInputStream(new FileInputStream(file));
-		 dis.readFully(fileData);
-		 dis.close();
+		 try{
+		 	DataInputStream dis = new DataInputStream(new FileInputStream(file));
+		 	dis.readFully(fileData);
+		 	dis.close();
+		 } catch(IOException e){
+		 	throw e;
+		 }
 		 
 		 for (int i = 0; i < fileData.length; i=i+4) {
 			 String bitString = "";
@@ -45,7 +46,7 @@ public class MainFile {
 					 toAdd = (CBInstruciton) toAdd;
 				 }
 				 toAdd.setBranchName((i/4) + Integer.parseInt(toAdd.BR_address));
-			 }
+
 			 
 			 programInstructions.add(toAdd);
 		 }
