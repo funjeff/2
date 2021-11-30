@@ -48,7 +48,7 @@ public class MainFile {
 				 }
 				 toAdd.setBranchName((i/4) + Integer.parseInt(toAdd.BR_address));
 
-			 
+			 }
 			 programInstructions.add(toAdd);
 		 }
 		 
