@@ -6,9 +6,6 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
-import com.sun.org.apache.bcel.internal.generic.Instruction;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -23,7 +20,7 @@ public class MainFile {
 	public static void main (String [] args) throws IOException{
 		
 		 ArrayList <Instruction> programInstructions = new ArrayList <Instruction> ();
-		 ArrayList <int> addressList = new ArrayList <int>();
+		 ArrayList <Integer> addressList = new ArrayList <Integer>();
 		 File file = new File(args[0]);
 		 byte[] fileData = new byte[(int) file.length()];
 		 try{
@@ -45,11 +42,11 @@ public class MainFile {
 			 
 			 Instruction toAdd = getInstruction(bitString);
 			 
-			 if (toAdd instanceof BInstrucion) {
+			 if (toAdd instanceof BInstruction) {
 				
-				 int address = (i/4) + Integer.parseInt((BInstrucion)toAdd.BR_address);
+				 int address = (i/4) + Integer.parseInt(((BInstruction)toAdd).BR_address);
 				 
-				 toAdd.setBranchName("A" + index);
+				 ((BInstruction)toAdd).setBranchName("A" + index);
 				 
 				 index = index + 1;
 				 
