@@ -20,7 +20,7 @@ public class MainFile {
 	public static void main (String [] args) throws IOException{
 		
 		 ArrayList <Instruction> programInstructions = new ArrayList <Instruction> ();
-		 Arraylist <int> addressList = new Arraylist<int>();
+		 Arraylist <int> addressList = new ArrayList <int>();
 		 File file = new File(args[0]);
 		 byte[] fileData = new byte[(int) file.length()];
 		 try{
