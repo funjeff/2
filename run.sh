@@ -1,2 +1,2 @@
 cd bin
-java main/main $1
+java MainFile/MainFile $1
